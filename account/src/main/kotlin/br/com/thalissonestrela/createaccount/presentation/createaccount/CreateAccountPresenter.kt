@@ -1,25 +1,15 @@
 package br.com.thalissonestrela.createaccount.presentation.createaccount
 
-import android.util.Log
-import br.com.thalissonestrela.createaccount.domain.createaccount.CreateAccountContract.IPresenter
-import br.com.thalissonestrela.createaccount.domain.createaccount.CreateAccountContract.IView
+import android.widget.Toast
+import br.com.thalissonestrela.createaccount.domain.createaccount.CreateAccountContract
 import br.com.thalissonestrela.createaccount.domain.createaccount.model.CreateUser
-import io.reactivex.Observable
-import io.reactivex.Scheduler
-import javax.inject.Inject
-import javax.inject.Named
+import br.com.thalissonestrela.share.scopes.BaseMvpPresenterImpl
 
-class CreateAccountPresenter @Inject constructor(
-        val view: IView,
-        @Named("IOScheduler") val ioScheduler: Scheduler,
-        @Named("MainScheduler") val mainScheduler: Scheduler): IPresenter {
+class CreateAccountPresenter : BaseMvpPresenterImpl<CreateAccountContract.View>(), CreateAccountContract.Presenter {
 
     override fun createAccount(createUser: CreateUser) {
-        Observable.just("A", "B")
-                .subscribeOn(ioScheduler)
-                .subscribe {
-                    Log.i("thalisson", "$it")
-                }
+        Toast.makeText(mView?.getContext(), "Welcome ${createUser.firstName}", Toast.LENGTH_SHORT).show()
+        mView?.showMessage("oi");
     }
 
 }

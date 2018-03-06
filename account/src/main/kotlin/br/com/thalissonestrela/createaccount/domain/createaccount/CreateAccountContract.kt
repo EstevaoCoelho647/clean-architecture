@@ -1,18 +1,20 @@
 package br.com.thalissonestrela.createaccount.domain.createaccount
-
+import br.com.thalissonestrela.share.scopes.BaseMvpView
+import br.com.thalissonestrela.share.scopes.BaseMvpPresenter
 import br.com.thalissonestrela.createaccount.domain.createaccount.model.CreateUser
 
-interface CreateAccountContract {
+/**
+ * Created by estevao.t0654 on 06/03/2018.
+ */
+class CreateAccountContract {
 
-    interface IView {
-        fun showLoading()
-        fun hideLoading()
-        fun showSuccess()
-        fun showError()
+    interface View : BaseMvpView {
+        fun showSomething()
     }
 
-    interface IPresenter {
+    interface Presenter : BaseMvpPresenter<View> {
         fun createAccount(createUser: CreateUser)
     }
+
 
 }

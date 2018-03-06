@@ -1,21 +1,19 @@
 package br.com.thalissonestrela.createaccount.presentation.createaccount
 
+import br.com.thalissonestrela.share.scopes.BaseMvpActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import br.com.thalissonestrela.createaccount.R
-import br.com.thalissonestrela.createaccount.domain.createaccount.CreateAccountContract.IPresenter
-import br.com.thalissonestrela.createaccount.domain.createaccount.CreateAccountContract.IView
+import br.com.thalissonestrela.createaccount.domain.createaccount.CreateAccountContract
 import br.com.thalissonestrela.createaccount.domain.createaccount.model.CreateUser
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_create_account.*
 import javax.inject.Inject
 
-class CreateAccountActivity : DaggerAppCompatActivity(), IView {
+class CreateAccountActivity : BaseMvpActivity<CreateAccountContract.View,
+        CreateAccountContract.Presenter>(), CreateAccountContract.View {
 
-    @Inject
-    lateinit var presenter: IPresenter
+    override var presenter: CreateAccountContract.Presenter = CreateAccountPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,31 +24,17 @@ class CreateAccountActivity : DaggerAppCompatActivity(), IView {
         }
     }
 
-    private fun getUserForCreate()
-        = CreateUser(
+    private fun getUserForCreate() = CreateUser(
             firstName = firstName.text.toString(),
             lastName = lastName.text.toString(),
             password = password.text.toString())
-
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
-
-    }
-
-    override fun showSuccess() {
-
-    }
-
-    override fun showError() {
-
-    }
 
     companion object {
         fun newIntent(context: Context): Intent =
                 Intent(context, CreateAccountActivity::class.java)
     }
 
+    override fun showSomething() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
